@@ -1,4 +1,5 @@
 using AutoMapper;
+using Backend.Src.DTO;
 using Backend.Src.DTO.Users;
 using Backend.Src.Models;
 
@@ -10,6 +11,7 @@ namespace Backend.Src.Extensions
         {
             CreateMap<User, UserDto>();
             CreateMap<Role, RoleDto>();
+            CreateMap<RegisterClientDto, User>();
         }
     }
 }

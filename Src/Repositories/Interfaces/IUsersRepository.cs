@@ -4,12 +4,14 @@ namespace Backend.Src.Repositories.Interfaces
 {
     public interface IUsersRepository
     {
-        public Task<User> GetById();
+        public Task<User?> GetById(int id);
 
-        public Task<User> GetByEmail();
+        public Task<User?> GetByEmail(string email);
 
-        public Task<User> GetByUsername();
+        public Task<User?> GetByUsername(string username);
 
         public Task<List<User>> GetAll();
+
+        public Task<User> Add(User user);
     }
 }

@@ -4,6 +4,12 @@ namespace Backend.Src.DTO
 {
     public class RegisterClientDto
     {
+
+        [Required]
+        [MinLength(5)]
+        [MaxLength(15)]
+        public string Username { get; set; } = string.Empty;
+
         [Required]
         [MinLength(5)]
         [MaxLength(15)]

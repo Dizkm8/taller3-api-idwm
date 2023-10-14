@@ -31,6 +31,7 @@ namespace Backend.Src.Extensions
         private static void AddServices(IServiceCollection services)
         {
             services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IMapperService, MapperService>();
         }
 
