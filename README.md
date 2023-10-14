@@ -14,7 +14,6 @@ Inicialmente se prepará el backend, para ello se deberá ejecutar el siguiente 
 git clone https://github.com/Dizkm8/Backend
 cd Backend
 dotnet restore
-dotnet ef database update
 dotnet run
 ```
 
