@@ -11,8 +11,8 @@ Backend para el curso Introducción al Desarrollo Web/Móvil (IDWM), utilizando 
 
 Inicialmente se prepará el backend, para ello se deberá ejecutar el siguiente comando en la terminal:
 ```
-git clone https://github.com/Dizkm8/Backend-IDWM
-cd Backend-IDWM
+git clone https://github.com/Dizkm8/Backend
+cd Backend
 dotnet restore
 dotnet ef database update
 dotnet run
