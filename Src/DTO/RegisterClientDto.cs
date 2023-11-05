@@ -6,18 +6,9 @@ namespace Backend.Src.DTO
     {
 
         [Required]
-        [MinLength(5)]
-        [MaxLength(15)]
+        [MinLength(3)]
+        [MaxLength(30)]
         public string Username { get; set; } = string.Empty;
-
-        [Required]
-        [MinLength(5)]
-        [MaxLength(15)]
-        public string Name { get; set; } = string.Empty;
-
-        [EmailAddress]
-        [Required]
-        public string Email { get; set; } = string.Empty;
 
         [Required]
         [MinLength(8)]

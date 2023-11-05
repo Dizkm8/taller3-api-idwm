@@ -25,12 +25,12 @@ namespace Backend.Src.Services
 
         public async Task<string?> Login(LoginUserDto loginUserDto)
         {
-            var user = await _usersRepository.GetByEmail(loginUserDto.Email);
+            var user = await _usersRepository.GetByUsername(loginUserDto.Username);
             if (user is null) return null;
 
             var result = BCrypt.Net.BCrypt.Verify(loginUserDto.Password, user.Password);
-            if(!result) return null;
-            
+            if (!result) return null;
+
             var token = CreateToken(user);
             return token;
         }
@@ -43,7 +43,7 @@ namespace Backend.Src.Services
             var mappedUser = _mapperService.RegisterClientDtoToUser(registerClientDto);
             // Ensure fill fields not mapped
             mappedUser.Password = passwordHash;
-            mappedUser.RoleId = 2; //TODO: Avoid hardcoded role
+            mappedUser.RoleId = 1; //TODO: Avoid hardcoded role
 
             var user = await _usersRepository.Add(mappedUser);
             var token = CreateToken(user);
@@ -53,7 +53,7 @@ namespace Backend.Src.Services
         private string CreateToken(User user)
         {
             var claims = new List<Claim>{
-                new ("email", user.Email)
+                new (ClaimTypes.Email, user.Username)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
@@ -62,7 +62,7 @@ namespace Backend.Src.Services
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddHours(2),
                 signingCredentials: creds
             );
 

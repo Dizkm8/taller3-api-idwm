@@ -29,12 +29,6 @@ namespace Backend.Src.Repositories
             return users;
         }
 
-        public async Task<User?> GetByEmail(string email)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-            return user;
-        }
-
         public async Task<User?> GetById(int id)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);

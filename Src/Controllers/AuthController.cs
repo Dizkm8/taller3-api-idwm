@@ -20,24 +20,27 @@ namespace Backend.Src.Controllers
             _authService = authService;
         }
 
-
-        // La ruta es localhost:5267/api/auth/register
         [HttpPost("register")]
-        public async Task<ActionResult<string>> Register(RegisterClientDto registerClientDto)
+        public async Task<ActionResult<LoginResponseDto>> Register(RegisterClientDto registerClientDto)
         {
             var token = await _authService.RegisterClient(registerClientDto);
-            return token;
+            return new LoginResponseDto()
+            {
+                Token = token
+            };
         }
 
-        // La ruta es localhost:5267/api/auth/login
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(LoginUserDto loginUserDto)
+        public async Task<ActionResult<LoginResponseDto>> Login(LoginUserDto loginUserDto)
         {
             var jwt = await _authService.Login(loginUserDto);
 
-            if(jwt is null) return BadRequest("Invalid Credentials");
+            if (jwt is null) return BadRequest("Invalid Credentials");
 
-            return jwt;
+            return new LoginResponseDto()
+            {
+                Token = jwt
+            };
         }
     }
 }
