@@ -1,6 +1,6 @@
 using Backend.Src.DTO.Users;
-using Backend.Src.Models;
 using Backend.Src.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Src.Controllers
@@ -17,6 +17,7 @@ namespace Backend.Src.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<List<UserDto>>> AllUsers()
         {
             var users = await _usersService.GetAll();

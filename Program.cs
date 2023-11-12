@@ -12,7 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddAuthentication().AddJwtBearer(opt =>
 {
-    opt.TokenValidationParameters = new TokenValidationParameters{
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
         ValidateIssuerSigningKey = true,
         ValidateAudience = false,
         ValidateIssuer = false,
@@ -36,7 +37,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    
+
 }
 
 app.UseHttpsRedirection();
@@ -45,7 +46,10 @@ app.UseAuthorization();
 
 app.UseCors(opt =>
 {
-    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
+    opt.AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins("http://localhost:3000", "http://localhost:3006");
 });
 
 app.MapControllers();

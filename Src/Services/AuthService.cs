@@ -23,7 +23,7 @@ namespace Backend.Src.Services
             _mapperService = mapperService;
         }
 
-        public async Task<string?> Login(LoginUserDto loginUserDto)
+        public async Task<LoginResponseDto?> Login(LoginUserDto loginUserDto)
         {
             var user = await _usersRepository.GetByUsername(loginUserDto.Username);
             if (user is null) return null;
@@ -32,10 +32,14 @@ namespace Backend.Src.Services
             if (!result) return null;
 
             var token = CreateToken(user);
-            return token;
+            return new LoginResponseDto()
+            {
+                Token = token,
+                Username = user.Username,
+            };
         }
 
-        public async Task<string> RegisterClient(RegisterClientDto registerClientDto)
+        public async Task<LoginResponseDto> RegisterClient(RegisterClientDto registerClientDto)
         {
             var salt = BCrypt.Net.BCrypt.GenerateSalt(12);
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(registerClientDto.Password, salt);
@@ -47,7 +51,11 @@ namespace Backend.Src.Services
 
             var user = await _usersRepository.Add(mappedUser);
             var token = CreateToken(user);
-            return token;
+            return new LoginResponseDto()
+            {
+                Token = token,
+                Username = user.Username,
+            };
         }
 
         private string CreateToken(User user)
