@@ -1,3 +1,5 @@
+using Backend.Src.Models;
+
 namespace Backend.Src.DTO.Users
 {
     public class UserDto
@@ -6,12 +8,8 @@ namespace Backend.Src.DTO.Users
 
         public string Username { get; set; } = null!;
 
-        public string Name { get; set; } = null!;
+        public int RoleId { get; set; }
 
-        public string Email { get; set; } = null!;
-
-        public string Password { get; set; } = null!;
-
-        public RoleDto Role { get; set; } = null!;
+        public Role Role { get; set; } = null!;
     }
 }

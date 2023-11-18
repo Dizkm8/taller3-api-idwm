@@ -2,7 +2,6 @@ using Backend.Src.DTO;
 using Backend.Src.Data;
 using Microsoft.AspNetCore.Mvc;
 using Backend.Src.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Backend.Src.Controllers
 {
@@ -19,20 +18,21 @@ namespace Backend.Src.Controllers
             _authService = authService;
         }
 
-        // [HttpPost("register")]
-        // public async Task<ActionResult<LoginResponseDto>> Register(RegisterClientDto registerClientDto)
-        // {
-        //     var response = await _authService.RegisterClient(registerClientDto);
-        //     return Ok(response);
-        // }
+        [HttpPost("register")]
+        public async Task<ActionResult<LoginResponseDto>> Register(RegisterClientDto registerClientDto)
+        {
+            var response = await _authService.RegisterClient(registerClientDto);
+            return Ok(response);
+        }
 
         [HttpPost("login")]
         public async Task<ActionResult<LoginResponseDto>> Login(LoginUserDto loginUserDto)
         {
+            Thread.Sleep(500);
             var response = await _authService.Login(loginUserDto);
 
             if (response is null) return BadRequest("Invalid Credentials");
-            ; return Ok(response);
+            return Ok(response);
         }
     }
 }
