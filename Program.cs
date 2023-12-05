@@ -49,7 +49,7 @@ app.UseCors(opt =>
     opt.AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials()
-    .WithOrigins("http://localhost:3000", "http://localhost:3006");
+    .WithOrigins("http://localhost:3000", "http://localhost:3006", "http://localhost:8081", "exp://192.168.1.87:8081");
 });
 
 app.MapControllers();

@@ -12,6 +12,8 @@ namespace Backend.Src.Data
 
         public DbSet<Role> Roles { get; set; } = null!;
 
+        public DbSet<Client> Clients { get; set; } = null!;
+
         public DataContext(DbContextOptions options) : base(options)
         {
         }
